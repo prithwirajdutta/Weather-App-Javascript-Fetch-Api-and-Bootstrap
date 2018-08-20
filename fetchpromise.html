@@ -12,7 +12,18 @@
   </head>
   <body style="padding-top:40px;">
    <center>
-       <button class="btn btn-outline-info" id="btnfd">Fetch Data</button><br><br>
+
+        <div class="container" style="width:800px;">   
+            <form class="form-group" id="fdata">
+            <div class="row">
+                <div class="col-md-5"> <input type="text" id="c1" name="country" placeholder="country" class="form-control"/></div>            
+                <div class="col-md-5"><input type="text" id="c2" name="city" placeholder="city" class="form-control"/></div>
+                <div class="col-md-2">
+                    <input type="submit"  class="btn btn-outline-info" value="Fetch Data"/>
+                    <br><br>
+                </div>              
+            </div>
+            </form></div>
         <div class="container"> 
                 <div class="card" style="width:400px;height:400px;padding:20px;">
                     <p style="font-size:20px;font-family:calibri;" class="datares"></p>
@@ -23,9 +34,14 @@
     <!-- Optional JavaScript -->
        <script>
            var result = document.querySelector(".datares");
-        var btn = document.querySelector("#btnfd");
-        btn.addEventListener("click",function(){
-            const country = "India";const city = "Delhi";
+        var formdata = document.querySelector("#fdata");
+        formdata.addEventListener("submit",function(e){
+            e.preventDefault();
+// ************Either way it will work***************** 
+//                const city = e.target.elements.city.value;
+//                const country = e.target.elements.country.value;
+            const country = document.getElementById("c1").value;
+            const city = document.getElementById("c2").value;
             fetch(`http://api.wunderground.com/api/73b0005b139fa130/conditions/q/${country}/${city}.json`)
                 .then(res=>res.json())
                 .then(data => {
